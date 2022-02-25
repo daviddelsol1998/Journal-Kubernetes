@@ -1,0 +1,39 @@
+{
+  "name": "journal-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+  },
+  "keywords": [],
+  "author": "David Del Sol",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "csurf": "^1.11.0",
+    "dompurify": "^2.0.8",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "jsdom": "^16.2.1",
+    "marked": "^0.8.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.9.4",
+    "nodemailer": "^6.7.2",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "prettier": "^2.5.1",
+    "sequelize": "^6.15.0",
+    "slugify": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}

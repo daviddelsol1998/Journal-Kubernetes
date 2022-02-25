@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cantarell&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <title>Journal</title>
+  </head>
+  <body>
+    <% if (isAuthenticated) { %> <% console.log("user: " + user) %>
+    <div class="container">
+      <li class="right">
+        <form action="/logout" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit" class="btn btn-info">Logout</button>
+        </form>
+      </li>
+      <h1 class="mb-4">Journal Entries</h1>
+      <a href="/entries/new" class="btn btn-success">New Entry</a>
+
+      <% entries.forEach(entry => { %>
+          <% if (user === entry.user) {%> 
+        <div class="card mt-4">
+          <div class="card-body">
+            <h4 class="card-title"><%= entry.title %></h4>
+            <div class="card-subtitle text-muted mb-2">
+              <%= entry.createdAt.toLocaleDateString() %>
+            </div>
+            <div class="card-text mb-2"><%= entry.description %></div>
+            <a href="entries/<%= entry.slug %>" class="btn btn-primary"
+              >Read More</a
+            >
+            <a href="entries/edit/<%= entry.id %>" class="btn btn-info">Edit</a>
+            <form
+              action="/entries/<%= entry.id %>?_method=DELETE"
+              method="POST"
+              class="d-inline"
+            >
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+        <% } %>
+      
+      <% }) %> <% } else { %>
+        <div class="landing">
+          <img id="main-image" src="/images/1.webp" alt="Main Logo">
+          <div class="navs">
+            <ul class="main-header__item-list">
+              <% console.log(isAuthenticated) %> 
+              <% if (!isAuthenticated) { %>
+              <li class="main-header__item">
+                <a
+                  class="<%= path === '/login' ? 'active' : '' %> btn btn-info link"
+                  href="/login"
+                  >Login</a
+                >
+              </li>
+              <li class="main-header__item">
+                <a
+                  class="<%= path === '/signup' ? 'active' : '' %> btn btn-info link"
+                  href="/signup"
+                  >Signup</a
+                >
+              </li>
+              <% } else { %>
+              <li class="main-header__item">
+                <form action="/logout" method="post">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <button type="submit" class="btn btn-info">Logout</button>
+                </form>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      <% } %>
+  </body>
+</html>
