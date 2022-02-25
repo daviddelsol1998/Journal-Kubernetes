@@ -12,14 +12,15 @@ const User = require('./models/user')
 const Entry = require("./models/entries");
 const authRoutes = require('./routes/auth');
 
-const MONGODB_URL = "mongodb+srv://mongo-admin:JpXCpMfEBVkvIRFQ@cluster0.loaca.mongodb.net/journal-app-db?retryWrites=true&w=majority"
+const MONGODB_URL = "mongodb://mongo:27017/journal-app"
 
 const app = express();
 
 const store = new MongoDBStore({
   uri: MONGODB_URL,
-  collection: 'sessions'
+  collection: 'sessions',
 });
+
 const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
@@ -84,5 +85,8 @@ mongoose.connect(MONGODB_URL, {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+
+
+
 
 app.listen(process.env.PORT || 3000);
