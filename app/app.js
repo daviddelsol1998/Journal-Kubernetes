@@ -12,7 +12,7 @@ const User = require('./models/user')
 const Entry = require("./models/entries");
 const authRoutes = require('./routes/auth');
 
-const MONGODB_URL = "mongodb://mongo:27017/journal-app"
+const MONGODB_URL = "mongodb+srv://admin:fC3uiINdLJOwWmlH@cluster0.loaca.mongodb.net/journal-app-db?retryWrites=true&w=majority"
 
 const app = express();
 
