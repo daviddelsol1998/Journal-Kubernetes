@@ -11,7 +11,7 @@ services:
     volumes:
       - mongo-data:/data/db
     environment:
-      SENDGRID_API_KEY: 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
+      SENDGRID_API_KEY: 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
   mongo:
     image: mongo:latest
     ports:
